@@ -1,3 +1,47 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Hello, let's play"
+
+def play
+puts "How many human players will play? Enter 0, 1 or 2"
+response = gets.chomp
+  case response
+    when "0"
+      computers_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      # @player_1 = Players::Computer.new("X")
+      # @player_2 = Players::Computer.new("O")
+      # until computers_game.over?
+      computers_game.play
+      # end
+    when "1"
+      puts "You are X and computer will play O. Go!"
+      one_human_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      # until one_human_game.over?
+      one_human_game.play
+      # end
+    when "2"
+      puts "Go X!"
+      humans_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      # until humans_game.over?
+      humans_game.play
+      # end
+    else
+      puts "Invalid number. Enter 0, 1 or 2 to play"        
+    end
+  end
+  
+play 
+
+   def play_again
+    puts "Would you like to play again? Enter 'yes' or 'no'"
+    continue = gets.chomp
+      if continue == "yes"
+        play
+        play_again
+      end
+   end
+
+play_again
